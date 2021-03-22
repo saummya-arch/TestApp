@@ -18,11 +18,11 @@ class _FirstPageState extends State<FirstPage> {
     return Scaffold(
       bottomNavigationBar: BottomNavBar(),
       backgroundColor: kAccentColor,
-      body: Column(
+      body: Stack(
         children: <Widget>[
-          Container(
-            //color: Colors.yellow,
-            height: size.height * 0.22,
+        Container(
+            //color: Colors.grey,
+            height: size.height * 0.4,
             child: Positioned(
               left: 0.0,
               top: 0.0,
@@ -31,14 +31,36 @@ class _FirstPageState extends State<FirstPage> {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(0.0),
-          ),
+          Positioned(
+            right: size.height * 0.06,
+            top: size.height * 0.07,
+            //height: size.height * 0.4,
+            child: SvgPicture.asset("assets/user.svg"), 
+          ),  
+
+
+
+          Positioned(
+            left: size.height * 0.02,
+            top: size.height * 0.07,
+            //height: size.height * 0.4,
+            child: Text("Control"), 
+          ), 
+
+
+          Positioned(
+            left: size.height * 0.02,
+            top: size.height * 0.09,
+            //height: size.height * 0.4,
+            child: Text("Panel"), 
+          ), 
+
+
 
           // second container
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            Container(
+              margin: const EdgeInsets.only(top: 180.0),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
               height: size.height * 60,
               decoration: BoxDecoration(
                 color: kPrimaryColor,
@@ -106,10 +128,17 @@ class _FirstPageState extends State<FirstPage> {
                 ),
               ),
             ),
-            //),
-          ),
-        ],
-      ),
-    );
-  }
-}
+            Positioned(
+              left: size.height * 0.05,
+              top: size.height * 0.25,
+              child: Text("All Rooms",
+              style: TextStyle(
+                  decoration: null, fontSize: 22.0, color: Colors.black),
+            ),
+            ),
+          //),
+         ],
+       ),
+     );
+   }
+ }
