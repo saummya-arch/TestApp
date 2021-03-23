@@ -20,7 +20,7 @@ class _FirstPageState extends State<FirstPage> {
       backgroundColor: kAccentColor,
       body: Stack(
         children: <Widget>[
-        Container(
+          Container(
             //color: Colors.grey,
             height: size.height * 0.4,
             child: Positioned(
@@ -35,110 +35,109 @@ class _FirstPageState extends State<FirstPage> {
             right: size.height * 0.06,
             top: size.height * 0.07,
             //height: size.height * 0.4,
-            child: SvgPicture.asset("assets/user.svg"), 
-          ),  
-
-
+            child: SvgPicture.asset("assets/user.svg"),
+          ),
 
           Positioned(
             left: size.height * 0.02,
             top: size.height * 0.07,
             //height: size.height * 0.4,
-            child: Text("Control"), 
-          ), 
-
+            child: Text("Control"),
+          ),
 
           Positioned(
             left: size.height * 0.02,
             top: size.height * 0.09,
             //height: size.height * 0.4,
-            child: Text("Panel"), 
-          ), 
-
-
+            child: Text("Panel"),
+          ),
 
           // second container
-            Container(
-              margin: const EdgeInsets.only(top: 180.0),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
-              height: size.height * 60,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
-              ),
-              child: Expanded(
-                // child: Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: <Widget>[
-                // Text(
-                //   "All Rooms",
-                //   style: TextStyle(decoration: null, fontSize: 5.0),
-                // ),
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  children: <Widget>[
-                    CategoryCard(
-                      title: "Bed Room",
-                      svgSrc: "assets/bed.svg",
-                      press: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return BedRoom();
-                        }));
-                      },
-                      lights: "4 Lights",
-                    ),
-                    CategoryCard(
-                      title: "Living Room",
-                      svgSrc: "assets/room.svg",
-                      press: () {},
-                      lights: "2 Lights",
-                    ),
-                    CategoryCard(
-                      title: "Kitchen",
-                      svgSrc: "assets/kitchen.svg",
-                      press: () {},
-                      lights: "5 Lights",
-                    ),
-                    CategoryCard(
-                      title: "Bathroom",
-                      svgSrc: "assets/bathtube.svg",
-                      press: () {},
-                      lights: "1 Lights",
-                    ),
-                    CategoryCard(
-                      title: "Outdoor",
-                      svgSrc: "assets/house.svg",
-                      press: () {},
-                      lights: "5 Lights",
-                    ),
-                    CategoryCard(
-                      title: "Balcony",
-                      svgSrc: "assets/balcony.svg",
-                      press: () {},
-                      lights: "2 Lights",
-                    ),
-                  ],
-                ),
+          Container(
+            margin: const EdgeInsets.only(top: 180.0),
+            padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 40.0),
+            height: size.height * 60,
+            decoration: BoxDecoration(
+              color: kPrimaryColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
               ),
             ),
-            Positioned(
-              left: size.height * 0.05,
-              top: size.height * 0.25,
-              child: Text("All Rooms",
+            child: Expanded(
+              // child: Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: <Widget>[
+              // Text(
+              //   "All Rooms",
+              //   style: TextStyle(decoration: null, fontSize: 5.0),
+              // ),
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 1.2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                children: <Widget>[
+                  CategoryCard(
+                    title: "Bed Room",
+                    svgSrc: "assets/bed.svg",
+                    press: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return BedRoom();
+                      }));
+                    },
+                    lights: "4 Lights",
+                  ),
+                  CategoryCard(
+                    title: "Living Room",
+                    svgSrc: "assets/room.svg",
+                    press: () {},
+                    lights: "2 Lights",
+                  ),
+                  CategoryCard(
+                    title: "Kitchen",
+                    svgSrc: "assets/kitchen.svg",
+                    press: () {},
+                    lights: "5 Lights",
+                  ),
+                  CategoryCard(
+                    title: "Bathroom",
+                    svgSrc: "assets/bathtube.svg",
+                    press: () {},
+                    lights: "1 Lights",
+                  ),
+                  CategoryCard(
+                    title: "Outdoor",
+                    svgSrc: "assets/house.svg",
+                    press: () {},
+                    lights: "5 Lights",
+                  ),
+                  CategoryCard(
+                    title: "Balcony",
+                    svgSrc: "assets/balcony.svg",
+                    press: () {},
+                    lights: "2 Lights",
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            left: size.height * 0.035,
+            top: size.height * 0.25,
+            child: Text(
+              "All Rooms",
               style: TextStyle(
-                  decoration: null, fontSize: 22.0, color: Colors.black),
+                  decoration: null,
+                  fontSize: 19.0,
+                  color: kAccentColor,
+                  fontWeight: FontWeight.bold),
             ),
-            ),
+          ),
           //),
-         ],
-       ),
-     );
-   }
- }
+        ],
+      ),
+    );
+  }
+}
