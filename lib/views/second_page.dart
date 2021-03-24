@@ -1,18 +1,33 @@
+import 'package:TestApp/helper/animations.dart';
 import 'package:TestApp/helper/constants.dart';
+import 'package:TestApp/views/choices.dart';
 import 'package:TestApp/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:async';
 
 class BedRoom extends StatefulWidget {
   @override
   _BedRoomState createState() => _BedRoomState();
 }
 
-class _BedRoomState extends State<BedRoom> {
+class _BedRoomState extends State<BedRoom> with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
 
+  @override
+  void initState() {
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
+    Timer(Duration(milliseconds: 200), () => _animationController.forward());
 
-  double currentslidervalue = 200.0;
+    super.initState();
+  }
 
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,6 @@ class _BedRoomState extends State<BedRoom> {
       body: Stack(
         children: <Widget>[
           Container(
-            //color: Colors.grey,
             height: size.height * 0.4,
             child: Positioned(
               left: 0.0,
@@ -33,282 +47,181 @@ class _BedRoomState extends State<BedRoom> {
             ),
           ),
           Positioned(
-            left: 10.0,
-            top: 2.0,
+            left: size.height * 0.030,
+            top: size.height * 0.028,
             height: size.height * 0.1,
             child:
                 SvgPicture.asset("assets/Icon ionic-md-arrow-round-back.svg"),
           ),
-          // Container(color: Colors.yellow, height: size.height * 0.4),
           Positioned(
-            left: 150.0,
-            top: 75.3,
+            left: size.height * 0.06,
+            top: size.height * 0.064,
             height: size.height * 0.3,
             child: Text(
               "Bed",
               style: TextStyle(
                 decoration: null,
-                fontSize: 25.0,
-                color: Colors.white,
+                fontSize: 35.0,
+                color: kPrimaryColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Positioned(
-            left: 50.0,
-            top: 36.0,
+            left: size.height * 0.030,
+            top: size.height * 0.1,
             height: size.height * 0.3,
             child: Text(
-              "Rooms",
+              "Room",
               style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.white),
+                  decoration: null,
+                  fontSize: 35.0,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Positioned(
-            right: 30.0,
-            top: 0.0,
-            child: SvgPicture.asset("assets/light bulb.svg"),
+            right: size.height * 0.042,
+            top: size.height * 0.0,
+            child:
+                FadeAnimation(1.125, SvgPicture.asset("assets/light bulb.svg")),
           ),
           Positioned(
-            left: 30.0,
-            top: 48.0,
-            child: Text(
-              "4 Lights",
-              style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.white),
+            left: size.height * 0.030,
+            top: size.height * 0.165,
+            child: FadeAnimation(
+              1.0,
+              Text(
+                "4 Lights",
+                style: TextStyle(
+                  decoration: null,
+                  fontSize: 20.0,
+                  color: kActiveColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 5.0),
           ),
-          //ScoreCard()
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-          ),
-          Container(
-          margin: const EdgeInsets.only(top: 200.0, left: 3.0),
-          height: 70.0,
-          child: ListView(
-            padding: const EdgeInsets.all(5.0),
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
+          SlideTransition(
+            position: Tween<Offset>(
+              begin: Offset(1, 0),
+              end: Offset.zero,
+            ).animate(_animationController),
+            child: FadeTransition(
+              opacity: _animationController,
+              child: Container(
+                margin: const EdgeInsets.only(top: 200.0, left: 13.0),
+                height: 70.0,
+                child: ListView(
+                  padding: const EdgeInsets.all(10.0),
+                  scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    SvgPicture.asset("assets/surface1.svg"),
-                    Text("Main Light",style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.white),
-                  ),
-                  ],
-                ),
-                color: kPrimaryColor,
-              ),
-              Padding(padding: const EdgeInsets.only(right: 5.0),
-              ),
-              RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
-                  children: <Widget>[
-                    SvgPicture.asset("assets/surface1.svg"),
-                    Text("Main Light",style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.white),
-                  ),
-                  ],
-                ),
-                color: kPrimaryColor,
-              ),
-               Padding(padding: const EdgeInsets.only(right: 5.0),
-              ),
-              RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
-                  children: <Widget>[
-                    SvgPicture.asset("assets/surface1.svg"),
-                    Text("Main Light",style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.white),
-                  ),
-                  ],
-                ),
-                color: kPrimaryColor,
-              ),
-            ],
-          ),
-        ),
-
-
-        //second Container
-        Container(
-              margin: const EdgeInsets.only(top: 300.0),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
-              height: size.height * 40,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Text("Intensity",style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.black),
-                  ),
-                 // Padding(padding: const EdgeInsets.only(top: 5.0),
-                  //),
-
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          height: 40.0,
-                          child: SvgPicture.asset("assets/solution2.svg", height: 30.0,)
+                    RaisedButton(
+                      onPressed: () => {},
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(15.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          SvgPicture.asset("assets/surface1.svg"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
                           ),
-                        Container(
-                          width: 290.0,
-                          child: Slider(
-                            min: 100.0,
-                            max: 1100.0,
-                            divisions: 6,
-                            activeColor: kActiveColor,
-                            inactiveColor: kInactiveColor,
-                            value: currentslidervalue,
-                           onChanged: (double value) {
-                             setState(() {
-                              currentslidervalue = value;
-                                });
-                          },),
-                        ),
-                        Container(
-                          height: 50.0,
-                          child: SvgPicture.asset("assets/solution.svg", height: 40.0,)
-                          ), 
-                      ],
+                          Text(
+                            "Main Light",
+                            style: TextStyle(
+                                decoration: null,
+                                fontSize: 17.0,
+                                color: kAccentColor,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                      color: kPrimaryColor,
                     ),
-                  Text("Colors",style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.black),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 30.0,
-                        width: 30.0,
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFE98479),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.0,
-                        width: 30.0,
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFE98479),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.0,
-                        width: 30.0,
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFE98479),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.0,
-                        width: 30.0,
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFE98479),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.0,
-                        width: 30.0,
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFE98479),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.0,
-                        width: 30.0,
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFE98479),
-                        ),
-                      ),
-                      ClipOval(
-                        child: Container(
-                          height: 30.0,
-                          width: 30.0,
-                          color: Color(0xFFE98479),
-                          child: SvgPicture.asset("assets/+.svg"),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text("Scenes",style: TextStyle(
-                  decoration: null, fontSize: 25.0, color: Colors.black),
-                  ),
-                  Expanded(
-                  child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 30,
-                      children: <Widget>[
-                        RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
-                    children: <Widget>[
-                      SvgPicture.asset("assets/surface2.svg"),
-                      Text("Main Light",style: TextStyle(
-                    decoration: null, fontSize: 25.0, color: Colors.white54),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
                     ),
-                    ],
+                    RaisedButton(
+                      onPressed: () => {},
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(15.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SvgPicture.asset(
+                              "assets/furniture-and-household.svg"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                          ),
+                          Text(
+                            "Dark Light",
+                            style: TextStyle(
+                                decoration: null,
+                                fontSize: 17.0,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                      color: kAccentColor,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                    ),
+                    RaisedButton(
+                      onPressed: () => {},
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(15.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SvgPicture.asset("assets/restbed.svg"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                          ),
+                          Text(
+                            "Bed Light",
+                            style: TextStyle(
+                                decoration: null,
+                                fontSize: 17.0,
+                                color: kAccentColor,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                      color: kPrimaryColor,
+                    ),
+                  ],
                 ),
-                color: kAccentColor,
               ),
-
-              //2
-              RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
-                    children: <Widget>[
-                      SvgPicture.asset("assets/surface2.svg"),
-                      Text("Main Light",style: TextStyle(
-                    decoration: null, fontSize: 25.0, color: Colors.white54),
+            ),
+          ),
+          ChoicePage(),
+          Positioned(
+            right: size.height * 0.025,
+            top: size.height * 0.345,
+            child: Container(
+              width: size.height * 0.027,
+              height: size.height * 0.027,
+              decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(3.0, 3.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 0.5,
                     ),
-                    ],
-                ),
-                color: kAccentColor,
-              ),
-
-              //3
-              RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
-                    children: <Widget>[
-                      SvgPicture.asset("assets/surface2.svg"),
-                      Text("Main Light",style: TextStyle(
-                    decoration: null, fontSize: 25.0, color: Colors.white54),
-                    ),
-                    ],
-                ),
-                color: kAccentColor,
-              ),
-
-              //4
-              RaisedButton(
-                onPressed: ()=>{},
-                child: Row(
-                    children: <Widget>[
-                      SvgPicture.asset("assets/surface2.svg"),
-                      Text("Main Light",style: TextStyle(
-                    decoration: null, fontSize: 25.0, color: Colors.white54),
-                    ),
-                    ],
-                ),
-                color: kAccentColor,
-              ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                  ]),
+              child: SvgPicture.asset("assets/Icon awesome-power-off.svg"),
+            ),
           ),
         ],
       ),

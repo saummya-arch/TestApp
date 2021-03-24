@@ -32,25 +32,36 @@ class _FirstPageState extends State<FirstPage> {
           ),
 
           Positioned(
-            right: size.height * 0.06,
-            top: size.height * 0.07,
+            right: size.height * 0.012,
+            top: size.height * 0.065,
             //height: size.height * 0.4,
-            child: SvgPicture.asset("assets/user.svg"),
+            child: SvgPicture.asset("assets/user.svg", width: 105.0, height:  105.0),
           ),
 
           Positioned(
-            left: size.height * 0.02,
+            left: size.height * 0.035,
             top: size.height * 0.07,
             //height: size.height * 0.4,
-            child: Text("Control"),
+            child: Text("Control",
+                  style: TextStyle(
+                  fontSize: 40.0,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),),
           ),
 
+
           Positioned(
-            left: size.height * 0.02,
-            top: size.height * 0.09,
+            left: size.height * 0.035,
+            top: size.height * 0.12,
             //height: size.height * 0.4,
-            child: Text("Panel"),
-          ),
+            child: Text("Panel",
+                  style: TextStyle(
+                  fontSize: 40.0,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),
+                ),
+              ),
+          
 
           // second container
           Container(
@@ -82,10 +93,11 @@ class _FirstPageState extends State<FirstPage> {
                     title: "Bed Room",
                     svgSrc: "assets/bed.svg",
                     press: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return BedRoom();
-                      }));
+                      Navigator.of(context).push(_createRoute());
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) {
+                      //   return BedRoom();
+                      // }));
                     },
                     lights: "4 Lights",
                   ),
@@ -140,4 +152,27 @@ class _FirstPageState extends State<FirstPage> {
       ),
     );
   }
+}
+
+
+
+
+
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => BedRoom(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(0, 0);
+      var end = Offset.zero;
+      var curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }

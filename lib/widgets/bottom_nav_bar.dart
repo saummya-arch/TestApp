@@ -9,7 +9,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 85.0, vertical: 10.0),
       height: 80,
       color: Colors.white,
       child: Row(
@@ -45,7 +45,6 @@ class BottomNavItem extends StatelessWidget {
         children: <Widget>[
           SvgPicture.asset(
             svgScr,
-            //color: isActive ? kActiveIconColor : kTextColor,
           ),
         ],
       ),
